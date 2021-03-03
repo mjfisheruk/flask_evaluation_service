@@ -1,0 +1,36 @@
+service: flask-evaluation-service
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  wsgi:
+    app: main.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+    pythonBin: /home/matt/.pyenv/shims/python
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: eu-west-1
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 'rds-data:ExecuteStatement'
+            - 'rds-data:BeginTransaction'
+            - 'rds-data:RollbackTransaction'
+            - 'secretsmanager:GetSecretValue'
+          Resource: '*'
+
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

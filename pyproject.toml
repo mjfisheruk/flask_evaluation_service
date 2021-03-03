@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "flask-evaluation-service"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Flask = "^1.1.2"
+pytest = "^6.2.2"
+boto3 = "^1.17.12"
+sqlalchemy-aurora-data-api = "^0.2.7"
+Flask-SQLAlchemy = "^2.4.4"
+marshmallow = "^3.10.0"
+black = "^20.8b1"
+pytest-mock = "^3.5.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
